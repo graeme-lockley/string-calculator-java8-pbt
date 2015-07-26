@@ -31,23 +31,20 @@ public class SCTest {
 
     @Test
     public void given_numbers_separated_with_commas_or_newlines_should_return_the_sum() throws Exception {
-        forAll(nonEmptyListOf(nonNegativeIntegers), ns -> {
-            assertEquals(add(mkString(ns, DEFAULT_SEPARATORS)), sum(ns));
-        });
+        forAll(nonEmptyListOf(nonNegativeIntegers),
+                ns -> assertEquals(add(mkString(ns, DEFAULT_SEPARATORS)), sum(ns)));
     }
 
     @Test
     public void given_non_negative_integers_separated_with_a_single_character_custom_separator_should_return_the_sum() throws Exception {
-        forAll(nonEmptyListOf(nonNegativeIntegers), separatorCharacters, (ns, sep) -> {
-            assertEquals(add("//" + sep + "\n" + mkString(ns, Collections.singletonList(sep.toString()))), sum(ns));
-        });
+        forAll(nonEmptyListOf(nonNegativeIntegers), separatorCharacters, (ns, sep) ->
+                assertEquals(add("//" + sep + "\n" + mkString(ns, Collections.singletonList(sep.toString()))), sum(ns)));
     }
 
     @Test
     public void given_non_negative_integers_separated_with_multiple_multi_character_custom_separators_should_return_the_sum() throws Exception {
-        forAll(nonEmptyListOf(nonNegativeIntegers), nonEmptyListOf(separatorStrings), (ns, seps) -> {
-            assertEquals(add("//[" + seps.stream().map(Object::toString).collect(Collectors.joining("][")) + "]\n" + mkString(ns, seps)), sum(ns));
-        });
+        forAll(nonEmptyListOf(nonNegativeIntegers), nonEmptyListOf(separatorStrings), (ns, seps) ->
+                assertEquals(add("//[" + seps.stream().map(Object::toString).collect(Collectors.joining("][")) + "]\n" + mkString(ns, seps)), sum(ns)));
     }
 
     @Test
