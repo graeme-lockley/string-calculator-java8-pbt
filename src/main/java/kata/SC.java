@@ -184,7 +184,7 @@ public class SC {
         if (lexer.head() == c) {
             lexer.next();
         } else {
-            throw lexer.parseError("Exepected " + c + "(" + ((int) c) + ")");
+            throw lexer.parseError("Expected " + c + "(" + ((int) c) + ")");
         }
     }
 }
